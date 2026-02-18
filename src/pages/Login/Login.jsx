@@ -30,6 +30,9 @@ function Login() {
 
     return (
         <div className="auth_container">
+            <div className="blob blob-1"></div>
+            <div className="blob blob-2"></div>
+            <div className="blob blob-3"></div>
             <div className="auth_box">
                 <h1>Sign In</h1>
                 {error && <p className="error">{error}</p>}
