@@ -1,0 +1,66 @@
+.auth_container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://assets.nflxext.com/ffe/siteui/vlv3/f669a35e-b631-4864-9a04-c5ca13718e0d/8e4af901-7e27-44f2-9844-33230a1c1d63/IN-en-20221031-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-size: cover;
+}
+
+.auth_box {
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 60px;
+    border-radius: 4px;
+    width: 400px;
+    color: white;
+}
+
+.auth_box h1 {
+    margin-bottom: 28px;
+}
+
+.auth_box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    background: #e50914;
+    /* Netflix Red */
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.auth_box input {
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    border: none;
+    background: #333;
+    color: white;
+}
+
+.auth_box button {
+    padding: 12px;
+    margin-top: 24px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth_box p {
+    margin-top: 20px;
+    color: #737373;
+}
+
+.auth_box a {
+    color: white;
+    text-decoration: none;
+}
