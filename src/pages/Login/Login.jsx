@@ -17,9 +17,8 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
         try {
-            const response = await axios.post(`${API_URL}/api/login`, formData);
+            const response = await axios.post("/api/login", formData);
             if (response.data.message === "Login successful") {
                 // Redirection to the specific Netflix landing page URL as requested
                 window.location.href = "https://movie-hub-c37o-3pygy5sm7-mikasa-techs-projects.vercel.app";
