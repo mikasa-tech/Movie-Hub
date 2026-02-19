@@ -3,11 +3,13 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../Register/Register.css";
 
-function Login() {
+function ForgotPassword() {
     const [formData, setFormData] = useState({
         email: "",
-        password: "",
+        userid: "",
+        newPassword: "",
     });
+    const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -17,15 +19,17 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setMessage("");
+        setError("");
+
         const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
         try {
-            const response = await axios.post(`${API_URL}/api/login`, formData);
-            if (response.data.message === "Login successful") {
-                // Redirection to the specific Netflix landing page URL as requested
-                window.location.href = "https://movie-hub-c37o-3pygy5sm7-mikasa-techs-projects.vercel.app";
-            }
+            const response = await axios.post(`${API_URL}/api/reset-password`, formData);
+            setMessage(response.data.message);
+            setTimeout(() => navigate("/login"), 2000);
         } catch (err) {
-            setError(err.response?.data?.error || "Login failed");
+            setError(err.response?.data?.error || "Password reset failed");
         }
     };
 
@@ -35,8 +39,9 @@ function Login() {
             <div className="blob blob-2"></div>
             <div className="blob blob-3"></div>
             <div className="auth_box">
-                <h1>Sign In</h1>
+                <h1>Reset Password</h1>
                 {error && <p className="error">{error}</p>}
+                {message && <p className="success" style={{ color: '#46d369', textAlign: 'center', marginBottom: '10px' }}>{message}</p>}
                 <form onSubmit={handleSubmit}>
                     <input
                         type="email"
@@ -46,28 +51,27 @@ function Login() {
                         required
                     />
                     <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
+                        type="text"
+                        name="userid"
+                        placeholder="User ID"
                         onChange={handleChange}
                         required
                     />
-                    <button type="submit">Sign In</button>
-                    <Link to="/forgot-password" style={{
-                        color: '#b3b3b3',
-                        fontSize: '0.9rem',
-                        textAlign: 'right',
-                        marginTop: '10px',
-                        display: 'block',
-                        textDecoration: 'none'
-                    }}>Forgot Password?</Link>
+                    <input
+                        type="password"
+                        name="newPassword"
+                        placeholder="New Password"
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit">Update Password</button>
                 </form>
                 <p>
-                    New to Netflix? <Link to="/register">Sign Up now.</Link>
+                    Remembered? <Link to="/login">Sign In now.</Link>
                 </p>
             </div>
         </div>
     );
 }
 
-export default Login;
+export default ForgotPassword;

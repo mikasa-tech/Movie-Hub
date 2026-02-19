@@ -65,6 +65,25 @@ app.post("/api/register", async (req, res) => {
     }
 });
 
+// Reset Password Endpoint
+app.post("/api/reset-password", async (req, res) => {
+    const { email, userid, newPassword } = req.body;
+    try {
+        const result = await pool.query("SELECT * FROM users WHERE email = $1 AND userid = $2", [email, userid]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: "User not found with these details." });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await pool.query("UPDATE users SET password = $1 WHERE email = $2 AND userid = $3", [hashedPassword, email, userid]);
+
+        res.json({ message: "Password reset successful" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error during password reset" });
+    }
+});
+
 // Login Endpoint
 app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
